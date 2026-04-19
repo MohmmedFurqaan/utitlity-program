@@ -9,13 +9,10 @@ except ImportError:
     print("Please install it by running: uv add pdf2docx")
     sys.exit(1)
 
-def convert_pdf_to_word(directory: Path):
-    """Converts all PDF files in the specified directory to Word (DOCX)."""
-    print(f"Scanning '{directory}' for PDF files...")
-    pdf_files = list(directory.glob("*.pdf"))
-    
+def convert_pdf_to_word(pdf_files: list[Path]):
+    """Converts a list of PDF files to Word (DOCX)."""
     if not pdf_files:
-        print("No PDF files found in the directory.")
+        print("No PDF files selected for conversion.")
         return
 
     for pdf_file in pdf_files:
@@ -35,15 +32,10 @@ def convert_pdf_to_word(directory: Path):
         except Exception as e:
             print(f"Failed to convert '{pdf_file.name}': {e}")
 
-def convert_word_to_pdf(directory: Path):
-    """Converts all Word (DOCX/DOC) files in the specified directory to PDF."""
-    print(f"Scanning '{directory}' for Word files...")
-    
-    # Matches both .doc and .docx
-    word_files = list(directory.glob("*.docx")) + list(directory.glob("*.doc"))
-    
+def convert_word_to_pdf(word_files: list[Path]):
+    """Converts a list of Word (DOCX/DOC) files to PDF."""
     if not word_files:
-        print("No Word files found in the directory.")
+        print("No Word files selected for conversion.")
         return
 
     for word_file in word_files:
@@ -59,7 +51,7 @@ def convert_word_to_pdf(directory: Path):
             # We use libreoffice headless to convert to pdf on Linux
             result = subprocess.run([
                 "libreoffice", "--headless", "--convert-to", "pdf", 
-                str(word_file), "--outdir", str(directory)
+                str(word_file), "--outdir", str(word_file.parent)
             ], capture_output=True, text=True)
 
             if result.returncode == 0:

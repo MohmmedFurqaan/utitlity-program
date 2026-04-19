@@ -6,6 +6,7 @@ A simple and efficient utilities module providing Command Line Interface (CLI) a
 
 - **Convert Word to PDF**: Read `.docx` or `.doc` files safely and translate them natively to `.pdf` while preserving formatting constraints natively.
 - **Convert PDF to Word**: Extract texts properly from `.pdf` documents and save those as directly editable `.docx` files securely.
+- **Smart Selection**: Choose specifically which files to convert through an interactive numbered list, or process all files at once.
 - **Smart Skipping**: Automatically detects existing equivalent converted documents and strategically skips re-processing them to limit latency constraints redundantly.
 - **Batch Processing**: Point natively to a targeted directory and all matching documents will dynamically convert as natively intended.
 
